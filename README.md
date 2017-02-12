@@ -1,6 +1,6 @@
 # oktopus
 
-> A Vue.js project
+> Search services for kartverket based on Vue.js
 
 ## Build Setup
 

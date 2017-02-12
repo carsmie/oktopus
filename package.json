@@ -1,7 +1,7 @@
 {
   "name": "oktopus",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "Search services for kartverket based on Vue.js",
   "author": "Carsten Mielke <carsten.mielke@kartverket.no>",
   "private": true,
   "scripts": {
