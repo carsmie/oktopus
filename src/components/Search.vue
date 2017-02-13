@@ -27,10 +27,8 @@
           return response.json();
         })
         .then((stories) => {
-          console.log(stories);
           this.message = stories;
         });
-      console.log(searchServices);
     },
   };
 
