@@ -7,6 +7,10 @@
 <script>
   import * as searchServices from '../services/search';
 
+  require('es6-promise').polyfill();
+
+  require('isomorphic-fetch');
+
   export default {
     name: 'Search',
     data() {
@@ -15,6 +19,16 @@
       };
     },
     mounted() {
+      fetch('//offline-news-api.herokuapp.com/stories')
+        .then((response) => {
+          if (response.status >= 400) {
+            throw new Error('Bad response from server');
+          }
+          return response.json();
+        })
+        .then((stories) => {
+          console.log(stories);
+        });
       console.log(searchServices);
     },
   };
