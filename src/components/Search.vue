@@ -1,6 +1,6 @@
 <template>
   <div id="search" class="search-bar-overlay">
-    <input v-model="message">
+    <input v-model="input">
     <p>{{ message }}</p>
   </div>
 </template>
@@ -28,6 +28,7 @@
         })
         .then((stories) => {
           console.log(stories);
+          this.message = stories;
         });
       console.log(searchServices);
     },
