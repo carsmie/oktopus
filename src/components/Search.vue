@@ -5,7 +5,9 @@
   </div>
 </template>
 <script>
-  import { generateSearchMatrikkelNummerUrl } from '../services/search';
+  import {
+    generateSearchMatrikkelNummerUrl
+  } from '../services/search';
 
   require('es6-promise').polyfill();
 
@@ -19,17 +21,19 @@
         searchTerm: 'Kartverksveien',
       };
     },
-    mounted() {
-      fetch(generateSearchMatrikkelNummerUrl('Kartverksveien'))
-        .then((response) => {
-          if (response.status >= 400) {
-            throw new Error('Bad response from server');
-          }
-          return response.json();
-        })
-        .then((result) => {
-          this.message = result;
-        });
+    watch: {
+      searchTerm(val) {
+        fetch(generateSearchMatrikkelNummerUrl(val))
+          .then((response) => {
+            if (response.status >= 400) {
+              throw new Error('Bad response from server');
+            }
+            return response.json();
+          })
+          .then((result) => {
+            this.message = result;
+          });
+      }
     },
   };
 
