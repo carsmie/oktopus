@@ -1,7 +1,11 @@
 <template>
   <div id="search" class="search-bar-overlay">
     <input v-model="searchTerm">
-    <p>{{ message }}</p>
+    <ul id="list1">
+      <li v-for="item in result">
+        {{ item }}
+      </li>
+    </ul>
   </div>
 </template>
 <script>
@@ -17,7 +21,7 @@
     name: 'Search',
     data() {
       return {
-        message: 'No results yet',
+        result: 'No results yet',
         searchTerm: 'Kartverksveien',
       };
     },
@@ -31,7 +35,7 @@
             return response.json();
           })
           .then((result) => {
-            this.message = result;
+            this.result = result;
           });
       }
     },
