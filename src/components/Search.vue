@@ -1,11 +1,11 @@
 <template>
   <div id="search" class="search-bar-overlay">
-    <input v-model="input">
+    <input v-model="searchTerm">
     <p>{{ message }}</p>
   </div>
 </template>
 <script>
-  import * as searchServices from '../services/search';
+  import { generateSearchMatrikkelNummerUrl } from '../services/search';
 
   require('es6-promise').polyfill();
 
@@ -15,19 +15,20 @@
     name: 'Search',
     data() {
       return {
-        message: 'Test!',
+        message: 'No results yet',
+        searchTerm: 'Kartverksveien',
       };
     },
     mounted() {
-      fetch('//offline-news-api.herokuapp.com/stories')
+      fetch(generateSearchMatrikkelNummerUrl('Kartverksveien'))
         .then((response) => {
           if (response.status >= 400) {
             throw new Error('Bad response from server');
           }
           return response.json();
         })
-        .then((stories) => {
-          this.message = stories;
+        .then((result) => {
+          this.message = result;
         });
     },
   };
