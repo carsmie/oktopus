@@ -3,7 +3,9 @@
     <input v-model="searchTerm">
     <ul id="list1">
       <li v-for="item in result">
-        {{ item }}
+        <div v-for="(innerItem, index) in item">
+        <b> {{ index }} - </b> {{ innerItem }}
+        </div>
       </li>
     </ul>
   </div>
