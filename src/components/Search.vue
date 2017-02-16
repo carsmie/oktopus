@@ -1,8 +1,8 @@
 <template>
   <div id="search" class="search-bar-overlay">
     <input v-model="searchTerm">
-    <ul id="list1">
-      <li v-for="item in result">
+    <ul class="list-group" id="list1">
+      <li class="list-group-item" v-for="item in result">
         <div v-for="(innerItem, index) in item">
         <b> {{ index }} - </b> {{ innerItem }}
         </div>
