@@ -4,7 +4,7 @@
     <ul class="list-group" id="list1">
       <li class="list-group-item" v-for="item in result">
         <div v-for="(innerItem, index) in item">
-        <b> {{ index }} - </b> {{ innerItem }}
+          <b> {{ index }} - </b> {{ innerItem }}
         </div>
       </li>
     </ul>
@@ -12,7 +12,9 @@
 </template>
 <script>
   import {
-    generateSearchMatrikkelNummerUrl
+    generateSearchMatrikkelNummerUrl,
+    generateSearchMatrikkelVegUrl,
+    generateSearchMatrikkelAdresseUrl
   } from '../services/search';
 
   require('es6-promise').polyfill();
