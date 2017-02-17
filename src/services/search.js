@@ -6,6 +6,26 @@
   const urlFaktaark = 'https://stadnamn.kartverket.no/fakta/';
   const urlHavnivaa = 'http://api.sehavniva.no/';
 
+  /** start search services */
+  export const generateSearchMatrikkelVegUrl = query => `${url}ws/veg.py?${encodeURIComponent(query)}`;
+
+  export const generateSearchMatrikkelAdresseUrl = query => `${url}ws/adr.py?${encodeURIComponent(query)}`;
+
+  export const generateSearchStedsnavnUrl = (query, side, antall) => `${urlGeonorge}SKWS3Index/v2/ssr/sok?navn=${encodeURIComponent(query)}
+    *&eksakteForst=false&antPerSide=${antall}&epsgKode=32633&side=${side}`;
+
+  export const generateSearchAdresseUrl = query => `${urlGeonorge}AdresseWS/adresse/sok?sokestreng=${encodeURIComponent(query)}
+    &antPerSide=100&side=1`;
+
+  export const generateSearchStedsnavnBboxUrl = (minx, miny, maxx, maxy) => `${urlGeonorge}SKWS3Index/ssr/sok?&nordLL=
+    ${miny}&ostLL=${minx}&nordUR=${maxy}&ostUR=${maxx}&epsgKode=32633`;
+
+  export const generateSearchMatrikkelNummerUrl = query => `${url}ws/eie.py?${encodeURIComponent(query)}`;
+
+  export const generateMatrikkelInfoUrl = (minx, miny, maxx, maxy) => `${url}ws/wfs.teig.py?bbox=${minx},${miny},${maxx},${maxy}`;
+
+  /** end search services */
+
   export const uploadGpxFileService = () => `${url}ws/w3w.py`;
 
   export const generateElevationChartServiceUrl = (gpxFile) => {
@@ -45,20 +65,8 @@
             }&street=${street}&place=${place}&matrikkel=${matrikkel}&utm=${utm}&posDez=${posDez}&map=${map}`;
   };
 
-  export const generateSearchMatrikkelVegUrl = query => `${url}ws/veg.py?${encodeURIComponent(query)}`;
-
-  export const generateSearchMatrikkelAdresseUrl = query => `${url}ws/adr.py?${encodeURIComponent(query)}`;
-
-  export const generateSearchStedsnavnUrl = (query, side, antall) => `${urlGeonorge}SKWS3Index/v2/ssr/sok?navn=${encodeURIComponent(query)}
-    *&eksakteForst=false&antPerSide=${antall}&epsgKode=32633&side=${side}`;
-
-  export const generateSearchAdresseUrl = query => `${urlGeonorge}AdresseWS/adresse/sok?sokestreng=${encodeURIComponent(query)}
-    &antPerSide=100&side=1`;
-
   export const generateElevationPointUrl = (lat, lon, epsgNumber) => `${urlOpenWps}wps.elevation?request=Execute&service=WPS
     &version=1.0.0&identifier=elevation&datainputs=[lat=${lat}lon=${lon}epsg=${epsgNumber}]`;
-
-  export const generateMatrikkelInfoUrl = (minx, miny, maxx, maxy) => `${url}ws/wfs.teig.py?bbox=${minx},${miny},${maxx},${maxy}`;
 
   export const generateSeEiendomUrl = (knr, gnr, bnr, fnr, snr) => `${urlSeEiendom}services/Matrikkel.svc/GetDetailPage?type=property
     &knr=${knr}&gnr=${gnr}&bnr=${bnr}&fnr=${fnr}&snr=${snr}&customer=kartverket`;
@@ -75,14 +83,9 @@
 
   export const generateEmergencyPosterPointUrl = (lat, lon) => `${url}ws/emergencyPoster.py?&lon=${lon},lat=${lat}`;
 
-  export const generateSearchStedsnavnBboxUrl = (minx, miny, maxx, maxy) => `${urlGeonorge}SKWS3Index/ssr/sok?&nordLL=
-    ${miny}&ostLL=${minx}&nordUR=${maxy}&ostUR=${maxx}&epsgKode=32633`;
-
   export const generateGeoJSONUrl = hash => `${url}user/json-test/${hash}.json`;
 
   export const generateGeoJSONSaveUrl = () => `${url}ws/upload-json-test.py`;
-
-  export const generateSearchMatrikkelNummerUrl = query => `${url}ws/eie.py?${encodeURIComponent(query)}`;
 
   export const generateMatrikkelWfsFilterUrl = (property) => {
     const constructMarkingFilter = () => `FILTER=${encodeURIComponent(`${'<ogc:Filter xmlns:ogc="http://www.opengis.net/ogc" xmlns:gml="http://www.opengis.net/gml">' +
