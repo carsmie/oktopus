@@ -8,13 +8,11 @@
 
   export const searchServices = {
     matrikkelVeg: query => `${url}ws/veg.py?${encodeURIComponent(query)}`,
-    matrikkelAdresse: query => `${url}ws/adr.py?${encodeURIComponent(query)}`
+    matrikkelAdresse: query => `${url}ws/adr.py?${encodeURIComponent(query)}`,
+    matrikkelNummer: query => `${url}ws/eie.py?${encodeURIComponent(query)}`
   };
 
   /** start search services */
-  export const generateSearchMatrikkelVegUrl = query => `${url}ws/veg.py?${encodeURIComponent(query)}`;
-
-  export const generateSearchMatrikkelAdresseUrl = query => `${url}ws/adr.py?${encodeURIComponent(query)}`;
 
   export const generateSearchStedsnavnUrl = (query, side, antall) => `${urlGeonorge}SKWS3Index/v2/ssr/sok?navn=${encodeURIComponent(query)}
     *&eksakteForst=false&antPerSide=${antall}&epsgKode=32633&side=${side}`;
@@ -24,8 +22,6 @@
 
   export const generateSearchStedsnavnBboxUrl = (minx, miny, maxx, maxy) => `${urlGeonorge}SKWS3Index/ssr/sok?&nordLL=
     ${miny}&ostLL=${minx}&nordUR=${maxy}&ostUR=${maxx}&epsgKode=32633`;
-
-  export const generateSearchMatrikkelNummerUrl = query => `${url}ws/eie.py?${encodeURIComponent(query)}`;
 
   export const generateMatrikkelInfoUrl = (minx, miny, maxx, maxy) => `${url}ws/wfs.teig.py?bbox=${minx},${miny},${maxx},${maxy}`;
 
