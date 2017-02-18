@@ -29,11 +29,13 @@
 
   require('isomorphic-fetch');
 
+  const searchcopy = Object.assign({}, searchServices);
+
   export default {
     name: 'Search',
     data() {
       return {
-        result: {},
+        result: searchcopy,
         searchTerm: 'Kartverksveien',
       };
     },
@@ -49,7 +51,6 @@
             })
             .then((result) => {
               this.result[key] = result;
-              console.log(this.result);
             });
         });
       }
