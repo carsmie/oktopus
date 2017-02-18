@@ -1,13 +1,20 @@
 <template>
-  <div id="search" class="search-bar-overlay">
-    <input v-model="searchTerm">
-    <ul class="list-group" id="list1">
-      <li class="list-group-item" v-for="item in result">
-        <div v-for="(innerItem, index) in item">
-          <b> {{ index }} - </b> {{ innerItem }}
-        </div>
-      </li>
-    </ul>
+  <div id="search">
+    <form class="form">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">search for</span>
+        <input class="form-control" v-model="searchTerm">
+      </div>
+    </form>
+    <div id="result">
+      <ul class="list-group" id="list1">
+        <li class="list-group-item" v-for="item in result">
+          <div v-for="(innerItem, index) in item">
+            <b> {{ index }} - </b> {{ innerItem }}
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
@@ -47,9 +54,10 @@
 
 </script>
 <style>
-  #search {
-    text-align: left;
-    color: #2c3e50;
-  }
-
+#search {
+   padding: 45px 15px 15px;
+}
+.form {
+    padding: 0px 0px 15px;
+}
 </style>
