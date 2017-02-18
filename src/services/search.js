@@ -6,6 +6,11 @@
   const urlFaktaark = 'https://stadnamn.kartverket.no/fakta/';
   const urlHavnivaa = 'http://api.sehavniva.no/';
 
+  export const searchServices = {
+    matrikkelVeg: query => `${url}ws/veg.py?${encodeURIComponent(query)}`,
+    matrikkelAdresse: query => `${url}ws/adr.py?${encodeURIComponent(query)}`
+  };
+
   /** start search services */
   export const generateSearchMatrikkelVegUrl = query => `${url}ws/veg.py?${encodeURIComponent(query)}`;
 

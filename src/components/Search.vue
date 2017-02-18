@@ -6,22 +6,23 @@
         <input class="form-control" v-model="searchTerm">
       </div>
     </form>
-    <div id="result">
-      <ul class="list-group" id="list1">
-        <li class="list-group-item" v-for="item in result">
-          <div v-for="(innerItem, index) in item">
-            <b> {{ index }} - </b> {{ innerItem }}
-          </div>
-        </li>
-      </ul>
-    </div>
+    <ul class="list-group" id="list1">
+      <li class="list-group-item" v-for="(searchresult, searchName) in result">
+        {{ searchName }}
+        <ul class="list-group" id="list2">
+          <li class="list-group-item" v-for="item in searchresult">
+            <div v-for="(innerItem, index) in item">
+              <b> {{ index }} - </b> {{ innerItem }}
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
   import {
-    generateSearchMatrikkelNummerUrl,
-    generateSearchMatrikkelVegUrl,
-    generateSearchMatrikkelAdresseUrl
+    searchServices
   } from '../services/search';
 
   require('es6-promise').polyfill();
@@ -32,32 +33,37 @@
     name: 'Search',
     data() {
       return {
-        result: 'No results yet',
+        result: {},
         searchTerm: 'Kartverksveien',
       };
     },
     watch: {
       searchTerm(val) {
-        fetch(generateSearchMatrikkelNummerUrl(val))
-          .then((response) => {
-            if (response.status >= 400) {
-              throw new Error('Bad response from server');
-            }
-            return response.json();
-          })
-          .then((result) => {
-            this.result = result;
-          });
+        Object.entries(searchServices).forEach(([key, searchFnc]) => {
+          fetch(searchFnc(val))
+            .then((response) => {
+              if (response.status >= 400) {
+                throw new Error('Bad response from server');
+              }
+              return response.json();
+            })
+            .then((result) => {
+              this.result[key] = result;
+              console.log(this.result);
+            });
+        });
       }
     },
   };
 
 </script>
 <style>
-#search {
-   padding: 45px 15px 15px;
-}
-.form {
+  #search {
+    padding: 45px 15px 15px;
+  }
+  
+  .form {
     padding: 0px 0px 15px;
-}
+  }
+
 </style>
